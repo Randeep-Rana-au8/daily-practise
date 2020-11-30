@@ -2,36 +2,35 @@ var express = require("express");
 var app = express();
 var hotelsRoute = require("./src/routes/hotelsRoute");
 var locationRoute = require("./src/routes/locationRoute");
-var port = process.env.PORT || 9090;
+var port = process.env.PORT || 9000;
+
+var menu = [
+  { link: "/", name: "Home" },
+  { link: "/hotels", name: "Hotels" },
+  { link: "/location", name: "Location" },
+];
+
+app.use(express.static(__dirname + "./public/css"));
+
+app.set("views", "./src/view");
+app.set("view engine", "ejs");
 
 //default route
 app.get("/", (req, res) => {
-  res.status(200).send("Hello I am running on default route");
+  res.render("index", { menuitem: menu });
 });
 
-//location route
-// locationRoute.route("/").get((req, res) => {
-//   res.status(200).send("I am at Location Route");
+//default route
+// app.get("/", (req, res) => {
+//   res.status(200).send("Hello I am running on default route");
 // });
 
-// locationRoute.route("/details").get((req, res) => {
-//   res.status(200).send("I am detail page of locations");
-// });
-
-// hotelsRoute.route("/").get((req, res) => {
-//   res.status(200).send("Hey, I am hotels router");
-// });
-
-// hotelsRoute.route("/details").get((req, res) => {
-//   res.status(200).send("I am the details page of hotels");
-// });
-
-app.get("/users", (req, res) => {
-  res.status(200).send("HI I am working on the users route");
-});
-
+// location route
 app.use("/location", locationRoute);
+
+// hotels route
 app.use("/hotels", hotelsRoute);
+
 app.listen(port, (err) => {
   if (err) throw err;
   console.log("Website is running on port number " + port);
