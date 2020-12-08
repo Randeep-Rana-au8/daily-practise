@@ -44,13 +44,13 @@ app.post("/addUser", (req, res) => {
   res.redirect("/users");
 });
 
-app.get("/deleteUser", (req, res) => {
+app.get("/delete", (req, res) => {
   console.log("I am in get method of delete ");
   res.render("delete");
 });
 
 app.delete("/deleteUser", (req, res) => {
-  console.log("I am in delete method");
+  console.log("I am in delete method", req.body);
   db.collection("users").remove({ name: req.body.name });
   res.redirect("/users");
 });
