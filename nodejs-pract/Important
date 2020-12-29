@@ -1,0 +1,12 @@
+ALL Nodejs Important Commands...
+
+
+**********************************************Node Package*****************************************************
+
+>> To get the list of the all the node packages with details from terminal   >> npm list
+>> To get the list of the all the node package with details from terminal
+>> To get the details of the package from terminal                           >> npm view packageName
+>> To get the dependencies details of the package                            >> npm view packageName dependencies
+>> To get the versions details of the package                                >> npm view packageName versions
+
+**************************************************************************************************************
