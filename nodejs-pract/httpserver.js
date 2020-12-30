@@ -5,7 +5,7 @@ const server = http.createServer((req, res) => {
     res.write("Hey i am working baby");
     res.end();
   }
-});
+
 
 server.on("connection", (socket) => {
   console.log("New Connection");
