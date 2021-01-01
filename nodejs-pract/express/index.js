@@ -25,6 +25,10 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
+  if (!req.body.name || req.body.name.length <= 3) {
+    res.send("Invalid Data Please add another data");
+    return;
+  }
   const newUser = { id: datas.length + 1, name: req.body.name };
   datas.push(newUser);
   res.send("Data Added");
