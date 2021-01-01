@@ -26,13 +26,9 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-  const schema = {
-    name: Joi.string().min(3).required(),
-  };
-  const result = Joi.validate(req.body, schema);
-
-  if (result.error) {
-    res.send(result.error.details[0].message);
+  const { error } = validationFunc(req.body);
+  if (error) {
+    res.send(error.details[0].message);
     return;
   }
   const newUser = { id: datas.length + 1, name: req.body.name };
@@ -40,10 +36,40 @@ app.post("/users", (req, res) => {
   res.send("Data Added");
 });
 
-app.get("/user/:id", (req, res) => {
+app.put("/users/:id", (req, res) => {
   const user = datas.find((data) => data.id === parseInt(req.params.id));
-  if (!user) res.status(404).send("The user is not available for this id");
+  if (!user)
+    return res.status(404).send("The user is not available for this id");
+
+  const { error } = validationFunc(req.body);
+  if (error) return res.send(error.details[0].message);
+
+  user.name = req.body.name;
+  res.send(user);
+});
+
+app.get("/users/:id", (req, res) => {
+  const user = datas.find((data) => data.id === parseInt(req.params.id));
+  if (!user)
+    return res.status(404).send("The user is not available for this id");
+  res.send(user);
+});
+
+app.delete("/users/:id", (req, res) => {
+  const user = datas.find((data) => data.id === parseInt(req.params.id));
+  if (!user)
+    return res.status(404).send("The user is not avaiable for this id");
+
+  const index = datas.indexOf(user);
+  datas.splice(index, 1);
   res.send(user);
 });
 
 app.listen(4000, () => console.log("App is running on port 4000"));
+
+function validationFunc(data) {
+  const schema = {
+    name: Joi.string().min(3).required(),
+  };
+  return Joi.validate(data, schema);
+}
