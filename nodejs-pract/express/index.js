@@ -1,4 +1,5 @@
 const express = require("express");
+const Joi = require("joi");
 const app = express();
 app.use(express.json());
 const datas = [
@@ -25,8 +26,13 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-  if (!req.body.name || req.body.name.length <= 3) {
-    res.send("Invalid Data Please add another data");
+  const schema = {
+    name: Joi.string().min(3).required(),
+  };
+  const result = Joi.validate(req.body, schema);
+
+  if (result.error) {
+    res.send(result.error.details[0].message);
     return;
   }
   const newUser = { id: datas.length + 1, name: req.body.name };
@@ -39,4 +45,5 @@ app.get("/user/:id", (req, res) => {
   if (!user) res.status(404).send("The user is not available for this id");
   res.send(user);
 });
+
 app.listen(4000, () => console.log("App is running on port 4000"));
