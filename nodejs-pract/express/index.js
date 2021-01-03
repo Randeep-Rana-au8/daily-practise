@@ -1,7 +1,12 @@
 const express = require("express");
 const Joi = require("joi");
+const logger = require("./logger");
 const app = express();
 app.use(express.json());
+
+//creating a custom middleware
+app.use(logger);
+
 const datas = [
   {
     id: 1,
