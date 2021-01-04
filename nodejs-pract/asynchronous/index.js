@@ -1,11 +1,19 @@
 console.log("Before");
-getUser(1, (user) => {
-  getRepositories(user.gitHubUsername, (repos) => {
-    getCommits(repos[0], (commits) => {
-      console.log(commits);
-    });
-  });
-});
+// using callbacks
+// getUser(1, (user) => {
+//   getRepositories(user.gitHubUsername, (repos) => {
+//     getCommits(repos[0], (commits) => {
+//       console.log(commits);
+//     });
+//   });
+// });
+
+// using promises
+getUser(1)
+  .then((user) => getRepositories(user.username))
+  .then((repos) => getCommits(repos[0]))
+  .then((commits) => console.log(commits));
+
 console.log("After");
 
 function getUser(id) {
@@ -29,7 +37,6 @@ function getRepositories(username) {
 function getCommits(repo) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log("Calling GitHub API...");
       resolve(["commit"]);
     }, 2000);
   });
