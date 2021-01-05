@@ -92,25 +92,39 @@ async function getCourses() {
 // getCourseByFiltering();
 
 // THIS FUNCTION RETURNS FILTERED VALUE BY REGULAR EXPRESSIONS
-async function getCourseByFiltering() {
-  // REGULAR EXPRESSIONS
+// async function getCourseByFiltering() {
+// REGULAR EXPRESSIONS
 
-  const res = await Course
-    // if i want to console the elements in which author name starts with Randeep
-    .find({ name: /^Randeep/ })
+// const res = await Course
+// if i want to console the elements in which author name starts with Randeep
+// .find({ name: /^Randeep/ })
 
-    //if i want to console the elements in which author name ends with Rana
-    .find({ name: /Rana$/ })
+//if i want to console the elements in which author name ends with Rana
+// .find({ name: /Rana$/ })
 
-    //if i want to console the elements in which author name contains Rana
-    .find({ name: /.*Rana.*/ })
+//if i want to console the elements in which author name contains Rana
+//     .find({ name: /.*Rana.*/ })
 
-    .sort({ name: 1 })
-    .limit(10)
+//     .sort({ name: 1 })
+//     .limit(10)
+//     .select({
+//       name: 1,
+//       author: 1,
+//     });
+//   console.log(res);
+// }
+// getCourseByFiltering();
+
+//PAGINATION
+async function getDataForPagination() {
+  const pageNumber = 2;
+  const pageSize = 10;
+  const res = await Course.find({})
+    .skip((pageNumber - 1) * pageSize)
+    .limit(pageSize)
     .select({
       name: 1,
       author: 1,
     });
   console.log(res);
 }
-getCourseByFiltering();
