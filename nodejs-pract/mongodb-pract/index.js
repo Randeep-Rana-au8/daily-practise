@@ -15,6 +15,8 @@ const schema = mongoose.Schema({
 });
 
 const Course = mongoose.model("Course", schema);
+
+//this is the function to create new documents in "courses" collection
 async function createCourse() {
   const course = new Course({
     name: "Reactjs course",
@@ -26,3 +28,11 @@ async function createCourse() {
   console.log(result);
 }
 createCourse();
+
+//this is the function which returns the all the items from a collection
+async function getCourses() {
+  const res = await Course.find({});
+  console.log(res);
+}
+
+getCourses();
