@@ -38,19 +38,35 @@ const Course = mongoose.model("Course", schema);
 // }
 // updateCourse("5a68fdd7bee8ea64649c2777");
 
-// METHOD 2 TO UPDATE A FIELD
-async function updateCourse(id) {
-  const course = await Course.findByIdAndUpdate(
-    id,
-    {
-      $set: {
-        name: "Cooking",
-        author: "apna jayka",
-      },
-    },
-    { new: true }
-  );
+// METHOD 3 TO UPDATE A FIELD
+// async function updateCourse(id) {
+//   const course = await Course.findByIdAndUpdate(
+//     id,
+//     {
+//       $set: {
+//         name: "Cooking",
+//         author: "apna jayka",
+//       },
+//     },
+//     { new: true }
+//   );
 
-  console.log(course);
+//   console.log(course);
+// }
+// updateCourse("5a68fdd7bee8ea64649c2777");
+
+// METHOD 1 TO DELETE/REMOVE DOCUMENT
+// async function deleteCourse(id) {
+//   const result = await Course.deleteOne({ _id: id });
+//   console.log(result);
+// }
+
+// deleteCourse("5a68fdd7bee8ea64649c2777");
+
+// METHOD 2 TO DELETE/REMOVE DOCUMENT
+async function deleteCourse(id) {
+  const result = await Course.findByIdAndDelete(id);
+  console.log(result);
 }
-updateCourse("5a68fdd7bee8ea64649c2777");
+
+deleteCourse("5a68fdd7bee8ea64649c2777");
