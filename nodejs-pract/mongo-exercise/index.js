@@ -32,11 +32,22 @@ const Course = mongoose.model("Course", schema);
 // run();
 
 // EXERCISE 2
+// async function getCourse() {
+//   const courses = await Course.find({ isPublished: true })
+//     .or([{ tags: "backend" }, { tags: "frontend" }])
+//     .sort({ price: -1 })
+//     .select({ name: 1, author: 1 });
+//   console.log(courses);
+// }
+
+// getCourse();
+
+// EXERCISE 3
 async function getCourse() {
-  const courses = await Course.find({ isPublished: true })
-    .or([{ tags: "backend" }, { tags: "frontend" }])
-    .sort({ price: -1 })
-    .select({ name: 1, author: 1 });
+  const courses = await Course.find({ isPublished: true }).or([
+    { price: { $gte: 15 } },
+    { name: /.*by.*/ },
+  ]);
   console.log(courses);
 }
 
