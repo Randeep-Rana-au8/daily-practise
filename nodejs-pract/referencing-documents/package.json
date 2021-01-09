@@ -1,0 +1,16 @@
+{
+  "name": "referencing-documents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "population.js",
+  "scripts": {
+    "start": "node population.js",
+    "dev": "nodemon population.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.11.11"
+  }
+}
