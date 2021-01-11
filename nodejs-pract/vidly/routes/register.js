@@ -2,6 +2,7 @@ const { User, validate } = require("../models/register");
 const express = require("express");
 const app = express();
 const _ = require("lodash");
+const bcrypt = require("bcrypt");
 
 app.post("/", async (req, res) => {
   const { error } = validate(req.body);
@@ -18,10 +19,15 @@ app.post("/", async (req, res) => {
   //   });
 
   // object with lodash
-  user = new User(_.pick(req.body, ["name", " email", "password"]));
-
-  await user.save();
-  res.send("User is registered");
+  try {
+    user = new User(_.pick(req.body, ["name", "email", "password"]));
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+    await user.save();
+    res.send("User is registered");
+  } catch (err) {
+    console.log(err.message);
+  }
 });
 
 module.exports = app;
