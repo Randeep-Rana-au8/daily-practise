@@ -25,7 +25,7 @@ const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
   const course = await new Course({
-    _id: 33,
+    _id: 36,
     name: "half stack coding",
     isPublished: true,
     tags: ["Data"],

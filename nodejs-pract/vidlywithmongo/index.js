@@ -12,7 +12,7 @@ app.use(express.json());
 
 const schema = new mongoose.Schema({
   _id: Number,
-  Genre: String,
+  Genre: { type: String, required: true },
 });
 
 const Collection = mongoose.model("Collection", schema);

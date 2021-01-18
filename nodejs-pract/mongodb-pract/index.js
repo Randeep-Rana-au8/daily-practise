@@ -128,3 +128,4 @@ async function getDataForPagination() {
     });
   console.log(res);
 }
+getDataForPagination();
