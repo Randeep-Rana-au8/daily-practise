@@ -19,6 +19,7 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: #777;
+  padding: 10px;
 }
 
 .header {
@@ -26,6 +27,16 @@ body {
   background-image: linear-gradient(to right bottom, #7ed56fcc, #28b485cc), url(../img/hero.jpg);
   background-size: cover;
   background-position: top;
-
+  position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+}
+
+.logo_box {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  height: 35px;
 }
