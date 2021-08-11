@@ -101,6 +101,16 @@ body {
   }
 }
 
+.btn {
+  padding: 10px;
+  font-size: 20px;
+  display: block;
+  margin: 12px auto;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+}
+
 @keyframes moveInRight {
   0% {
     opacity: 0;
